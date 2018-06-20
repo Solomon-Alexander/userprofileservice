@@ -5,17 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import groovy.transform.EqualsAndHashCode;
 
 @Entity
 @Table(name = "ORGANIZATION")
+@EqualsAndHashCode
 public class Organization {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT(11)")
 	private Long id;
 
 	@Column(name = "ORG_NAME")
@@ -36,7 +37,7 @@ public class Organization {
 	@Column(name = "STATE")
 	private String state;
 	
-	@Column(name = "POST_CODE")
+	@Column(name = "POSTCODE")
 	private String postcode;
 	
 	@Column(name = "COUNTRY")

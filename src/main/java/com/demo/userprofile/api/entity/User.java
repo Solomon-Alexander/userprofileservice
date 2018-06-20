@@ -3,6 +3,7 @@ package com.demo.userprofile.api.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,13 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import groovy.transform.EqualsAndHashCode;
+
 @Entity
-@Table(name = "user")
+@Table(name = "USER")
+@EqualsAndHashCode
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT(11)")
 	private Long id;
 
 	@Column(name = "USER_NAME")
@@ -44,7 +48,7 @@ public class User {
 	@Column(name = "STATE")
 	private String state;
 	
-	@Column(name = "POST_CODE")
+	@Column(name = "POSTCODE")
 	private String postcode;
 	
 	@Column(name = "COUNTRY")
@@ -57,19 +61,22 @@ public class User {
 	private String email;
 	
 	@Column(name = "ACTIVE")
-	private String active;
+	private int active;
 	
-	@OneToMany(mappedBy="user")
-	private List<Role> roles = new ArrayList<Role>();
+	@OneToMany(
+	        cascade = CascadeType.ALL, 
+	        orphanRemoval = true
+	)
+	private List<Role> role = new ArrayList<Role>();
 	
-	public List<Role> getRoles() {
-		return roles;
+	public List<Role> getRole() {
+		return role;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRole(List<Role> role) {
+		this.role = role;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -174,11 +181,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getActive() {
+	public int getActive() {
 		return active;
 	}
 
-	public void setActive(String active) {
+	public void setActive(int active) {
 		this.active = active;
 	}
 

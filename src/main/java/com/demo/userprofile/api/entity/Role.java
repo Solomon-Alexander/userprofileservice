@@ -7,13 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import groovy.transform.EqualsAndHashCode;
+
 @Entity
 @Table(name = "ROLE")
+@EqualsAndHashCode
 public class Role {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", columnDefinition = "INT(11)")
 	private Long id;
 
 	@Column(name = "ROLE_NAME")

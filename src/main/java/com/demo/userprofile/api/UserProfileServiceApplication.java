@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
 import com.demo.userprofile.api.controller.UserProfileController;
-import com.demo.userprofile.api.service.impl.WebUserProfileService;
+import com.demo.userprofile.api.service.UserProfileService;
+import com.demo.userprofile.api.service.impl.UserProfileServiceImpl;
 
 /**
  * @author Solomon.Alexander
@@ -38,8 +39,8 @@ public class UserProfileServiceApplication {
     }
 
     @Bean
-    public WebUserProfileService userProfileService() {
-        return new WebUserProfileService(USERPROFILE_SERVICE_URL);
+    public UserProfileService userProfileService() {
+        return new UserProfileServiceImpl(USERPROFILE_SERVICE_URL);
     }
 
     @Bean
